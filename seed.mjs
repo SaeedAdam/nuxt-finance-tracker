@@ -4,8 +4,8 @@ import 'dotenv/config'
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
-  // process.env.SUPABASE_KEY, {
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5saWZ2cnhwbGpmbnZ1cXhzaW1uIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwNDgyMDYyNywiZXhwIjoyMDIwMzk2NjI3fQ.RrU7qYNrMCn0HAvKpYnadXjDLUKnSDETbtSjLsNQWSk', {
+  process.env.SUPABASE_KEY, {
+  // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5saWZ2cnhwbGpmbnZ1cXhzaW1uIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwNDgyMDYyNywiZXhwIjoyMDIwMzk2NjI3fQ.RrU7qYNrMCn0HAvKpYnadXjDLUKnSDETbtSjLsNQWSk', {
   auth: { persistSession: false }
 })
 const categories = ['Food', 'Housing', 'Car', 'Entertainment']
