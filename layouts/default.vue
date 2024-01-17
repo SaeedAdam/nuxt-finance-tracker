@@ -16,7 +16,7 @@ useHead({
 </script>
 
 <template>
-  <div class="container mx-auto max-w-4xl">
+  <div class="container mx-auto max-w-screen-2xl">
     <app-header />
     <main class="my-10">
       <slot />

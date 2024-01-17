@@ -42,6 +42,7 @@ const supabase = useSupabaseClient()
 const { toastError, toastSuccess } = useAppToast()
 
 const save = async () => {
+  console.log(form.value.errors)
   if (form.value.errors.length) return
 
   isLoading.value = true

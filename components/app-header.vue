@@ -5,7 +5,7 @@
     </NuxtLink>
     <div>
       <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' }, width: 'w-64' }" v-if="user">
-        <UAvatar :src="url" alt="Avatar" />
+        <UAvatar :src="url || false" alt="Avatar" />
 
         <template #account="{ item }">
           <div class="text-left">
@@ -28,26 +28,27 @@
   </header>
 </template>
 
-<script setup>
-// const supabase = useSupabaseClient()
-// const user = useSupabaseUser()
-// const { url } = useAvatarUrl()
+<script lang='ts' setup>
+import type { DropdownItem } from '@nuxt/ui/dist/runtime/types';
 
-// const items = [
-//   [{
-//     slot: 'account',
-//     disabled: true
-//   }], [{
-//     label: 'Settings',
-//     icon: 'i-heroicons-cog-8-tooth',
-//     onClick: () => navigateTo('/settings/profile')
-//   }, {
-//     label: 'Sign out',
-//     icon: 'i-heroicons-arrow-left-on-rectangle',
-//     onClick: async () => {
-//       await supabase.auth.signOut()
-//       return navigateTo('/login')
-//     }
-//   }]
-// ]
+const supabase = useSupabaseClient()
+const user = useSupabaseUser()
+const { url } = useAvatarUrl()
+
+const items: DropdownItem[][] = [
+  [{ label: 'Account', slot: 'account', disabled: true }],
+  [{
+    label: 'Settings',
+    icon: 'i-heroicons-cog-8-tooth',
+    click: () => navigateTo('/settings/profile')
+  },
+  {
+    label: 'Sign out',
+    icon: 'i-heroicons-arrow-left-on-rectangle',
+    click: async () => {
+      await supabase.auth.signOut()
+      return navigateTo('/login')
+    }
+  }]
+]
 </script>

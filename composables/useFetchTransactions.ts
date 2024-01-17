@@ -17,33 +17,34 @@ export const useFetchTransactions = (period: any) => {
     expense.value.reduce((sum: number, transaction: any) => sum + transaction.amount, 0)
   );
 
-  // const fetchTransactions = async () => {
-  //   pending.value = true;
-  //   try {
-  //     const { data } = await useAsyncData(`transactions-${period.value.from?.toDateString()}-${period.value.to?.toDateString()}`, async () => {
-  //       const { data, error } = await supabase
-  //         .from('transactions')
-  //         .select()
-  //         .gte('created_at', period.value.from.toISOString())
-  //         .lte('created_at', period.value.to.toISOString())
-  //         .order('created_at', { ascending: false });
+  const fetchTransactions = async () => {
+    pending.value = true;
+    try {
+      const { data } = await useAsyncData(`transactions-${period.value.from?.toDateString()}-${period.value.to?.toDateString()}`, async () => {
+        console.log('fetching transactions');
+        const { data, error } = await supabase
+          .from('transactions')
+          .select()
+          .gte('created_at', period.value.from.toISOString())
+          .lte('created_at', period.value.to.toISOString())
+          .order('created_at', { ascending: false });
 
-  //       if (error) return [];
+        if (error) return [];
 
-  //       return data;
-  //     });
+        return data;
+      });
 
-  //     return data.value;
-  //   } finally {
-  //     pending.value = false;
-  //   }
-  // };
+      return data.value;
+    } finally {
+      pending.value = false;
+    }
+  };
 
   const refresh = async () => {
     console.log('refreshing transactions');
   }
 
-  //watch(period, async () => await refresh());
+  watch(period, async () => await refresh());
 
   const transactionsGroupedByDate = computed(() => {
     let grouped: Record<string, any[]> = {};
