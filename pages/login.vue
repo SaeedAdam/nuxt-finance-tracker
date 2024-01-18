@@ -18,7 +18,7 @@ const handleLogin = async () => {
         emailRedirectTo: `${redirectUrl}/confirm`
       }
     })
-debugger
+
     if (error) {
       toastError({
         title: 'Error authenticating',
