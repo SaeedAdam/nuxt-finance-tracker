@@ -30,7 +30,7 @@ const sum = computed(() => {
 
   return sum
 })
-console.log(sum)
+
 const { formattedCurrency: currency } = useCurrency(sum.value, currencies.SAR)
 </script>
 
