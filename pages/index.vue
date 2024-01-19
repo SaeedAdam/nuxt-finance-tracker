@@ -1,25 +1,18 @@
 <script lang="ts" setup>
-const user = useSupabaseUser()
-const selectedView = ref(user.value?.user_metadata?.transaction_view ?? transactionViewOptions[1])
-const isOpen = ref(false)
-const { current, previous } = useSelectedTimePeriod(selectedView)
+const user = useSupabaseUser();
+const selectedView = ref(user.value?.user_metadata?.transaction_view ?? transactionViewOptions[1]);
+const isOpen = ref(false);
 
-const { pending, refresh, transactions: {
-  incomeCount,
-  expenseCount,
-  incomeTotal,
-  expenseTotal,
-  grouped: {
-    byDate
-  }
-} } = useFetchTransactions(current)
-await refresh()
+const { current, previous } = useSelectedTimePeriod(selectedView);
 
-const { refresh: refreshPrevious, transactions: {
-  incomeTotal: prevIncomeTotal,
-  expenseTotal: prevExpenseTotal,
-} } = useFetchTransactions(previous)
-await refreshPrevious()
+const { pending, refresh, transactions: { incomeCount, expenseCount, incomeTotal, expenseTotal, grouped: { byDate } } } = useFetchTransactions(current);
+
+const { refresh: refreshPrevious, transactions: { incomeTotal: prevIncomeTotal, expenseTotal: prevExpenseTotal } } = useFetchTransactions(previous);
+
+onMounted(async () => {
+  await refresh();
+  await refreshPrevious();
+});
 </script>
 
 <template>
@@ -28,7 +21,10 @@ await refreshPrevious()
       Summary
     </h1>
     <div>
-      <USelectMenu :options="transactionViewOptions" v-model="selectedView" />
+
+      <ClientOnly>
+        <USelectMenu :options="transactionViewOptions" v-model="selectedView" />
+      </ClientOnly>
     </div>
   </section>
 

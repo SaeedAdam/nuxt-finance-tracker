@@ -42,7 +42,6 @@ const supabase = useSupabaseClient()
 const { toastError, toastSuccess } = useAppToast()
 
 const save = async () => {
-  console.log(form.value.errors)
   if (form.value.errors.length) return
 
   isLoading.value = true
@@ -109,7 +108,7 @@ const isOpen = computed({
         {{ isEditing ? 'Edit' : 'Add' }} Transaction
       </template>
 
-      <UForm :state="state" :schema="schema" ref="form" @submit.prevent="save">
+      <UForm :state="state" :schema="schema" ref="form" @submit="save">
         <UFormGroup :required="true" label="Transaction Type" name="type" class="mb-4">
           <USelect :disabled="isEditing" placeholder="Select the transaction type" :options="types"
             v-model="state.type" />

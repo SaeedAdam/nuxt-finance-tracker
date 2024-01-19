@@ -20,29 +20,33 @@ export const useFetchTransactions = (period: any) => {
   const fetchTransactions = async () => {
     pending.value = true;
     try {
-      const { data } = await useAsyncData(`transactions-${period.value.from?.toDateString()}-${period.value.to?.toDateString()}`, async () => {
-        console.log('fetching transactions');
-        const { data, error } = await supabase
-          .from('transactions')
-          .select()
-          .gte('created_at', period.value.from.toISOString())
-          .lte('created_at', period.value.to.toISOString())
-          .order('created_at', { ascending: false });
+      const { data } = await useAsyncData(
+        `transactions-${period.value.start?.toDateString()}-${period.value.end?.toDateString()}`,
+        async () => {
+          console.log('fetching transactions');
 
-        if (error) return [];
+          const { data, error } = await supabase
+            .from('transactions')
+            .select()
+            .gte('created_at', period.value.start.toISOString())
+            .lte('created_at', period.value.end.toISOString())
+            .order('created_at', { ascending: false });
 
-        return data;
-      });
+          if (error) return [];
+
+          return data;
+        });
 
       return data.value;
-    } finally {
+    } catch (error) {
+      console.log(error);
+    }
+    finally {
       pending.value = false;
     }
   };
 
-  const refresh = async () => {
-    console.log('refreshing transactions');
-  }
+  const refresh = async () => transactions.value = (await fetchTransactions()) || [];
 
   watch(period, async () => await refresh());
 

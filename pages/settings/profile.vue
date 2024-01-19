@@ -1,5 +1,5 @@
 <template>
-  <UForm :state="state" :schema="schema" @submit.prevent="saveProfile">
+  <UForm :state="state" :schema="schema" @submit="saveProfile">
     <UFormGroup class="mb-4" label="Full Name" name="name">
       <UInput v-model="state.name" />
     </UFormGroup>

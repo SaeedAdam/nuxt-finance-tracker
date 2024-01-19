@@ -9,4 +9,12 @@
 export const transactionViewOptions = ['Yearly', 'Monthly', 'Daily']
 export const categories = ['Food', 'Housing', 'Car', 'Entertainment']
 export const types = ['Income', 'Expense', 'Saving', 'Investment']
-export const currencies = ['USD', 'EUR', 'GBP', 'INR', 'JPY', 'CNY', 'SAR']
+export const currencies = {
+    USD: 'USD',
+    EUR: 'EUR',
+    GBP: 'GBP',
+    INR: 'INR',
+    JPY: 'JPY',
+    CNY: 'CNY',
+    SAR: 'SAR'
+}

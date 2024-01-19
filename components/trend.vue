@@ -13,7 +13,7 @@ const trendingUp = computed(
 const icon = computed(
   () => trendingUp.value ? 'i-heroicons-arrow-trending-up' : 'i-heroicons-arrow-trending-down'
 )
-const { formattedCurrency: currency } = useCurrency(amount?.value, 'SAR')
+const { formattedCurrency: currency } = useCurrency(amount?.value, currencies.SAR)
 
 const percentageTrend = computed(() => {
   if (props.amount === 0 || props.lastAmount === 0) return '∞%';
