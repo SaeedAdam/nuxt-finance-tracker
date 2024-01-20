@@ -1,6 +1,6 @@
 export const useAvatarUrl = () => {
   // Get the current user metadata - which contain name of avatar image
-  // Public URL of that image
+  // Get Public URL of that image
   // Watch user for any changes - so we always display image of the user
 
   const supabase = useSupabaseClient()
