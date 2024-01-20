@@ -1,8 +1,14 @@
 <template>
   <header class="flex justify-between items-center mt-10">
-    <NuxtLink to="/" class="text-xl font-bold">
-      Finance Tracker
-    </NuxtLink>
+    <div class="flex items-center space-x-2">
+      <ClientOnly>
+        <img src="/assets/images/logo-180x180.png" alt="Finance Tracker" class="h-8 w-8" />
+      </ClientOnly>
+      <NuxtLink to="/" class="text-xl font-bold">
+        Finance Tracker
+      </NuxtLink>
+    </div>
+
     <div>
       <ClientOnly>
         <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' }, width: 'w-64' }" v-if="user">
