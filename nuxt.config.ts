@@ -2,12 +2,16 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/ui', '@nuxtjs/supabase'],
+
   supabase: {
     redirect: false
   },
+
   runtimeConfig: {
     public: {
       baseUrl: process.env.BASE_URL ?? 'http://localhost:3000'
     }
   },
+
+  compatibilityDate: '2024-08-16',
 })
