@@ -12,6 +12,6 @@ export default defineNuxtConfig({
       baseUrl: process.env.BASE_URL ?? 'http://localhost:3000'
     }
   },
-
+  
   compatibilityDate: '2024-08-16',
 })
